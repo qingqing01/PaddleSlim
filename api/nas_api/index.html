@@ -177,10 +177,11 @@
 <p><strong>返回：</strong> 
 一个SANAS类的实例</p>
 <p><strong>示例代码：</strong></p>
-<pre><code>from paddleslim.nas import SANAS
-config = [('MobileNetV2Space')]
-sanas = SANAS(config=config)
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">paddleslim.nas</span> <span class="kn">import</span> <span class="n">SANAS</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;MobileNetV2Space&#39;</span><span class="p">)]</span>
+<span class="n">sanas</span> <span class="o">=</span> <span class="n">SANAS</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+
 
 <hr />
 <blockquote>
@@ -192,13 +193,14 @@ sanas = SANAS(config=config)
 <p><strong>返回</strong>
 返回一个模型结构实例。</p>
 <p><strong>示例代码：</strong></p>
-<pre><code>import paddle.fluid as fluid
-input = fluid.data(name='input', shape=[None, 3, 32, 32], dtype='float32')
-archs = sanas.token2arch(tokens)
-for arch in archs:
-    output = arch(input)
-    input = output
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">paddle.fluid</span> <span class="kn">as</span> <span class="nn">fluid</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">archs</span> <span class="o">=</span> <span class="n">sanas</span><span class="o">.</span><span class="n">token2arch</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">arch</span> <span class="ow">in</span> <span class="n">archs</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">arch</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+    <span class="nb">input</span> <span class="o">=</span> <span class="n">output</span>
+</pre></div>
+
 
 <hr />
 <blockquote>
@@ -208,13 +210,14 @@ for arch in archs:
 <p><strong>返回</strong>
 返回模型结构实例的列表，形式为list。</p>
 <p><strong>示例代码：</strong></p>
-<pre><code>import paddle.fluid as fluid
-input = fluid.data(name='input', shape=[None, 3, 32, 32], dtype='float32')
-archs = sanas.next_archs()
-for arch in archs:
-    output = arch(input)
-    input = output
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">paddle.fluid</span> <span class="kn">as</span> <span class="nn">fluid</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">archs</span> <span class="o">=</span> <span class="n">sanas</span><span class="o">.</span><span class="n">next_archs</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">arch</span> <span class="ow">in</span> <span class="n">archs</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">arch</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+    <span class="nb">input</span> <span class="o">=</span> <span class="n">output</span>
+</pre></div>
+
 
 <hr />
 <blockquote>
@@ -226,105 +229,104 @@ for arch in archs:
 <p><strong>返回</strong>
 模型结构更新成功或者失败，成功则返回<code>True</code>，失败则返回<code>False</code>。</p>
 <p><strong>代码示例</strong></p>
-<pre><code class="python">import numpy as np
-import paddle
-import paddle.fluid as fluid
-from paddleslim.nas import SANAS
-from paddleslim.analysis import flops
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">paddle</span>
+<span class="kn">import</span> <span class="nn">paddle.fluid</span> <span class="kn">as</span> <span class="nn">fluid</span>
+<span class="kn">from</span> <span class="nn">paddleslim.nas</span> <span class="kn">import</span> <span class="n">SANAS</span>
+<span class="kn">from</span> <span class="nn">paddleslim.analysis</span> <span class="kn">import</span> <span class="n">flops</span>
 
-max_flops = 321208544
-batch_size = 256
+<span class="n">max_flops</span> <span class="o">=</span> <span class="mi">321208544</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">256</span>
 
-# 搜索空间配置
-config=[('MobileNetV2Space')] 
+<span class="c1"># 搜索空间配置</span>
+<span class="n">config</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;MobileNetV2Space&#39;</span><span class="p">)]</span> 
 
-# 实例化SANAS
-sa_nas = SANAS(config, server_addr=(&quot;&quot;, 8887), init_temperature=10.24, reduce_rate=0.85, search_steps=100, is_server=True)
+<span class="c1"># 实例化SANAS</span>
+<span class="n">sa_nas</span> <span class="o">=</span> <span class="n">SANAS</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">server_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">8887</span><span class="p">),</span> <span class="n">init_temperature</span><span class="o">=</span><span class="mf">10.24</span><span class="p">,</span> <span class="n">reduce_rate</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">search_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">is_server</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-for step in range(100):
-    archs = sa_nas.next_archs()
-    train_program = fluid.Program()
-    test_program = fluid.Program()
-    startup_program = fluid.Program()
-    ### 构造训练program
-    with fluid.program_guard(train_program, startup_program):
-        image = fluid.data(name='image', shape=[None, 3, 32, 32], dtype='float32')
-        label = fluid.data(name='label', shape=[None, 1], dtype='int64')
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">archs</span> <span class="o">=</span> <span class="n">sa_nas</span><span class="o">.</span><span class="n">next_archs</span><span class="p">()</span>
+    <span class="n">train_program</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">Program</span><span class="p">()</span>
+    <span class="n">test_program</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">Program</span><span class="p">()</span>
+    <span class="n">startup_program</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">Program</span><span class="p">()</span>
+    <span class="c1">### 构造训练program</span>
+    <span class="k">with</span> <span class="n">fluid</span><span class="o">.</span><span class="n">program_guard</span><span class="p">(</span><span class="n">train_program</span><span class="p">,</span> <span class="n">startup_program</span><span class="p">):</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int64&#39;</span><span class="p">)</span>
 
-        for arch in archs:
-            output = arch(image)
-        out = fluid.layers.fc(output, size=10, act=&quot;softmax&quot;) 
-        softmax_out = fluid.layers.softmax(input=out, use_cudnn=False)
-        cost = fluid.layers.cross_entropy(input=softmax_out, label=label)
-        avg_cost = fluid.layers.mean(cost)
-        acc_top1 = fluid.layers.accuracy(input=softmax_out, label=label, k=1)
+        <span class="k">for</span> <span class="n">arch</span> <span class="ow">in</span> <span class="n">archs</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">arch</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">act</span><span class="o">=</span><span class="s2">&quot;softmax&quot;</span><span class="p">)</span> 
+        <span class="n">softmax_out</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">out</span><span class="p">,</span> <span class="n">use_cudnn</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">cost</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">softmax_out</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">avg_cost</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span>
+        <span class="n">acc_top1</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">softmax_out</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-        ### 构造测试program
-        test_program = train_program.clone(for_test=True)
-        ### 定义优化器
-        sgd = fluid.optimizer.SGD(learning_rate=1e-3)
-        sgd.minimize(avg_cost)
-
-
-    ### 增加限制条件，如果没有则进行无限制搜索
-    if flops(train_program) &gt; max_flops:
-        continue
-
-    ### 定义代码是在cpu上运行
-    place = fluid.CPUPlace()
-    exe = fluid.Executor(place)
-    exe.run(startup_program)
-
-    ### 定义训练输入数据
-    train_reader = paddle.batch(
-        paddle.reader.shuffle(
-            paddle.dataset.cifar.train10(cycle=False), buf_size=1024),
-        batch_size=batch_size,
-        drop_last=True)
-
-    ### 定义预测输入数据
-    test_reader = paddle.batch(
-        paddle.dataset.cifar.test10(cycle=False),
-        batch_size=batch_size,
-        drop_last=False)
-    train_feeder = fluid.DataFeeder([image, label], place, program=train_program)
-    test_feeder = fluid.DataFeeder([image, label], place, program=test_program)
+        <span class="c1">### 构造测试program</span>
+        <span class="n">test_program</span> <span class="o">=</span> <span class="n">train_program</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">for_test</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="c1">### 定义优化器</span>
+        <span class="n">sgd</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+        <span class="n">sgd</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">avg_cost</span><span class="p">)</span>
 
 
-    ### 开始训练，每个搜索结果训练5个epoch
-    for epoch_id in range(5):
-        for batch_id, data in enumerate(train_reader()):
-            fetches = [avg_cost.name]
-            outs = exe.run(train_program,
-                           feed=train_feeder.feed(data),
-                           fetch_list=fetches)[0]
-            if batch_id % 10 == 0:
-                print('TRAIN: steps: {}, epoch: {}, batch: {}, cost: {}'.format(step, epoch_id, batch_id, outs[0]))
+    <span class="c1">### 增加限制条件，如果没有则进行无限制搜索</span>
+    <span class="k">if</span> <span class="n">flops</span><span class="p">(</span><span class="n">train_program</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_flops</span><span class="p">:</span>
+        <span class="k">continue</span>
 
-    ### 开始预测，得到最终的测试结果作为score回传给sa_nas
-    reward = []
-    for batch_id, data in enumerate(test_reader()):
-        test_fetches = [
-            avg_cost.name, acc_top1.name
-        ]
-        batch_reward = exe.run(test_program,
-                               feed=test_feeder.feed(data),
-                               fetch_list=test_fetches)
-        reward_avg = np.mean(np.array(batch_reward), axis=1)
-        reward.append(reward_avg)
+    <span class="c1">### 定义代码是在cpu上运行</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">CPUPlace</span><span class="p">()</span>
+    <span class="n">exe</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">Executor</span><span class="p">(</span><span class="n">place</span><span class="p">)</span>
+    <span class="n">exe</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">startup_program</span><span class="p">)</span>
 
-        print('TEST: step: {}, batch: {}, avg_cost: {}, acc_top1: {}'.
-            format(step, batch_id, batch_reward[0],batch_reward[1]))
+    <span class="c1">### 定义训练输入数据</span>
+    <span class="n">train_reader</span> <span class="o">=</span> <span class="n">paddle</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span>
+        <span class="n">paddle</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span>
+            <span class="n">paddle</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">cifar</span><span class="o">.</span><span class="n">train10</span><span class="p">(</span><span class="n">cycle</span><span class="o">=</span><span class="bp">False</span><span class="p">),</span> <span class="n">buf_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">),</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+        <span class="n">drop_last</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-    finally_reward = np.mean(np.array(reward), axis=0)
-    print(
-        'FINAL TEST: avg_cost: {}, acc_top1: {}'.format(
-            finally_reward[0], finally_reward[1]))
+    <span class="c1">### 定义预测输入数据</span>
+    <span class="n">test_reader</span> <span class="o">=</span> <span class="n">paddle</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span>
+        <span class="n">paddle</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">cifar</span><span class="o">.</span><span class="n">test10</span><span class="p">(</span><span class="n">cycle</span><span class="o">=</span><span class="bp">False</span><span class="p">),</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+        <span class="n">drop_last</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">train_feeder</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">DataFeeder</span><span class="p">([</span><span class="n">image</span><span class="p">,</span> <span class="n">label</span><span class="p">],</span> <span class="n">place</span><span class="p">,</span> <span class="n">program</span><span class="o">=</span><span class="n">train_program</span><span class="p">)</span>
+    <span class="n">test_feeder</span> <span class="o">=</span> <span class="n">fluid</span><span class="o">.</span><span class="n">DataFeeder</span><span class="p">([</span><span class="n">image</span><span class="p">,</span> <span class="n">label</span><span class="p">],</span> <span class="n">place</span><span class="p">,</span> <span class="n">program</span><span class="o">=</span><span class="n">test_program</span><span class="p">)</span>
 
-    ### 回传score
-    sa_nas.reward(float(finally_reward[1]))
 
-</code></pre>
+    <span class="c1">### 开始训练，每个搜索结果训练5个epoch</span>
+    <span class="k">for</span> <span class="n">epoch_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">batch_id</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_reader</span><span class="p">()):</span>
+            <span class="n">fetches</span> <span class="o">=</span> <span class="p">[</span><span class="n">avg_cost</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+            <span class="n">outs</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">train_program</span><span class="p">,</span>
+                           <span class="n">feed</span><span class="o">=</span><span class="n">train_feeder</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+                           <span class="n">fetch_list</span><span class="o">=</span><span class="n">fetches</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">batch_id</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;TRAIN: steps: {}, epoch: {}, batch: {}, cost: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">epoch_id</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">,</span> <span class="n">outs</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="c1">### 开始预测，得到最终的测试结果作为score回传给sa_nas</span>
+    <span class="n">reward</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">batch_id</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">test_reader</span><span class="p">()):</span>
+        <span class="n">test_fetches</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">avg_cost</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">acc_top1</span><span class="o">.</span><span class="n">name</span>
+        <span class="p">]</span>
+        <span class="n">batch_reward</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">test_program</span><span class="p">,</span>
+                               <span class="n">feed</span><span class="o">=</span><span class="n">test_feeder</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+                               <span class="n">fetch_list</span><span class="o">=</span><span class="n">test_fetches</span><span class="p">)</span>
+        <span class="n">reward_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">batch_reward</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">reward</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward_avg</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;TEST: step: {}, batch: {}, avg_cost: {}, acc_top1: {}&#39;</span><span class="o">.</span>
+            <span class="n">format</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">,</span> <span class="n">batch_reward</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">batch_reward</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="n">finally_reward</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">reward</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span>
+        <span class="s1">&#39;FINAL TEST: avg_cost: {}, acc_top1: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">finally_reward</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">finally_reward</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="c1">### 回传score</span>
+    <span class="n">sa_nas</span><span class="o">.</span><span class="n">reward</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">finally_reward</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
               
             </div>
           </div>

@@ -163,28 +163,30 @@
 <p>请参考 <a href='../../../paddleslim/quant/quantization_api_doc.md'>量化API文档</a>。</p>
 <h2 id="_3">分类模型的离线量化流程</h2>
 <h3 id="1">1. 配置量化参数</h3>
-<pre><code>quant_config = {
-    'weight_quantize_type': 'abs_max',
-    'activation_quantize_type': 'moving_average_abs_max',
-    'weight_bits': 8,
-    'activation_bits': 8,
-    'not_quant_pattern': ['skip_quant'],
-    'quantize_op_types': ['conv2d', 'depthwise_conv2d', 'mul'],
-    'dtype': 'int8',
-    'window_size': 10000,
-    'moving_rate': 0.9,
-    'quant_weight_only': False
+<div class="codehilite"><pre><span></span>quant_config = {
+    &#39;weight_quantize_type&#39;: &#39;abs_max&#39;,
+    &#39;activation_quantize_type&#39;: &#39;moving_average_abs_max&#39;,
+    &#39;weight_bits&#39;: 8,
+    &#39;activation_bits&#39;: 8,
+    &#39;not_quant_pattern&#39;: [&#39;skip_quant&#39;],
+    &#39;quantize_op_types&#39;: [&#39;conv2d&#39;, &#39;depthwise_conv2d&#39;, &#39;mul&#39;],
+    &#39;dtype&#39;: &#39;int8&#39;,
+    &#39;window_size&#39;: 10000,
+    &#39;moving_rate&#39;: 0.9,
+    &#39;quant_weight_only&#39;: False
 }
-</code></pre>
+</pre></div>
+
 
 <h3 id="2-programop">2. 对训练和测试program插入可训练量化op</h3>
-<pre><code>val_program = quant_aware(val_program, place, quant_config, scope=None, for_test=True)
+<div class="codehilite"><pre><span></span>val_program = quant_aware(val_program, place, quant_config, scope=None, for_test=True)
 
 compiled_train_prog = quant_aware(train_prog, place, quant_config, scope=None, for_test=False)
-</code></pre>
+</pre></div>
+
 
 <h3 id="3build">3.关掉指定build策略</h3>
-<pre><code>build_strategy = fluid.BuildStrategy()
+<div class="codehilite"><pre><span></span>build_strategy = fluid.BuildStrategy()
 build_strategy.fuse_all_reduce_ops = False
 build_strategy.sync_batch_norm = False
 exec_strategy = fluid.ExecutionStrategy()
@@ -192,33 +194,35 @@ compiled_train_prog = compiled_train_prog.with_data_parallel(
         loss_name=avg_cost.name,
         build_strategy=build_strategy,
         exec_strategy=exec_strategy)
-</code></pre>
+</pre></div>
+
 
 <h3 id="4-freeze-program">4. freeze program</h3>
-<pre><code>float_program, int8_program = convert(val_program, 
+<div class="codehilite"><pre><span></span>float_program, int8_program = convert(val_program, 
                                       place,
                                       quant_config,
                                       scope=None,
                                       save_int8=True)
-</code></pre>
+</pre></div>
+
 
 <h3 id="5">5.保存预测模型</h3>
-<pre><code>fluid.io.save_inference_model(
+<div class="codehilite"><pre><span></span>fluid.io.save_inference_model(
     dirname=float_path,
     feeded_var_names=[image.name],
     target_vars=[out], executor=exe,
     main_program=float_program,
-    model_filename=float_path + '/model',
-    params_filename=float_path + '/params')
+    model_filename=float_path + &#39;/model&#39;,
+    params_filename=float_path + &#39;/params&#39;)
 
 fluid.io.save_inference_model(
     dirname=int8_path,
     feeded_var_names=[image.name],
     target_vars=[out], executor=exe,
     main_program=int8_program,
-    model_filename=int8_path + '/model',
-    params_filename=int8_path + '/params')
-</code></pre>
+    model_filename=int8_path + &#39;/model&#39;,
+    params_filename=int8_path + &#39;/params&#39;)
+</pre></div>
               
             </div>
           </div>
