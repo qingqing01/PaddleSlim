@@ -165,9 +165,7 @@
               
                 <h1 id="api">卷积通道剪裁API文档</h1>
 <h2 id="class-pruner">class Pruner</h2>
-<blockquote>
-<p>paddleslim.prune.Pruner(criterion="l1_norm")<a href="">源代码</a></p>
-</blockquote>
+<p>.. py:function:: paddleslim.prune.Pruner(criterion="l1_norm")<a href="">源代码</a></p>
 <p>对卷积网络的通道进行一次剪裁。剪裁一个卷积层的通道，是指剪裁该卷积层输出的通道。卷积层的权重形状为<code>[output_channel, input_channel, kernel_size, kernel_size]</code>，通过剪裁该权重的第一纬度达到剪裁输出通道数的目的。</p>
 <p><strong>参数：</strong></p>
 <ul>
@@ -181,7 +179,10 @@
 
 
 <h2 id="prune">prune</h2>
-<p>.. py:function:: prune(program, scope, params, ratios, place=None, lazy=False, only_graph=False, param_backup=False, param_shape_backup=False)</p>
+<div class="codehilite"><pre><span></span>prune(program, scope, params, ratios, place=None, lazy=False, only_graph=False, param_backup=False, param_shape_backup=False)
+</pre></div>
+
+
 <p>对目标网络的一组卷积层的权重进行裁剪。</p>
 <p><strong>参数：</strong></p>
 <ul>
