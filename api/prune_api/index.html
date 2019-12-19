@@ -82,7 +82,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../quantization_api_doc/">量化</a>
+    <a class="" href="../quantization_api/">量化</a>
                 </li>
                 <li class=" current">
                     
@@ -95,13 +95,13 @@
         
             <li><a class="toctree-l4" href="#class-pruner">class Pruner</a></li>
         
-            <li><a class="toctree-l4" href="#prune">prune</a></li>
-        
             <li><a class="toctree-l4" href="#sensitivity">sensitivity</a></li>
         
             <li><a class="toctree-l4" href="#merge_sensitive">merge_sensitive</a></li>
         
             <li><a class="toctree-l4" href="#load_sensitivities">load_sensitivities</a></li>
+        
+            <li><a class="toctree-l4" href="#get_ratios_by_losssensitivities-loss">get_ratios_by_loss(sensitivities, loss)</a></li>
         
         </ul>
     
@@ -114,7 +114,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../single_distiller_api_doc/">蒸馏</a>
+    <a class="" href="../single_distiller_api/">蒸馏</a>
                 </li>
                 <li class="">
                     
@@ -122,7 +122,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../search_space_doc/">搜索空间</a>
+    <a class="" href="../search_space/">搜索空间</a>
                 </li>
     </ul>
 	    </li>
@@ -165,7 +165,10 @@
               
                 <h1 id="api">卷积通道剪裁API文档</h1>
 <h2 id="class-pruner">class Pruner</h2>
-<p>.. py:function:: paddleslim.prune.Pruner(criterion="l1_norm")<a href="">源代码</a></p>
+<hr />
+<blockquote>
+<p>paddleslim.prune.Pruner(criterion="l1_norm")<a href="">源代码</a></p>
+</blockquote>
 <p>对卷积网络的通道进行一次剪裁。剪裁一个卷积层的通道，是指剪裁该卷积层输出的通道。卷积层的权重形状为<code>[output_channel, input_channel, kernel_size, kernel_size]</code>，通过剪裁该权重的第一纬度达到剪裁输出通道数的目的。</p>
 <p><strong>参数：</strong></p>
 <ul>
@@ -178,8 +181,10 @@
 </pre></div>
 
 
-<h2 id="prune">prune</h2>
-<h3 id="pruneprogram-scope-params-ratios-placenone-lazyfalse-only_graphfalse-param_backupfalse-param_shape_backupfalse">prune(program, scope, params, ratios, place=None, lazy=False, only_graph=False, param_backup=False, param_shape_backup=False)</h3>
+<hr />
+<blockquote>
+<p>prune(program, scope, params, ratios, place=None, lazy=False, only_graph=False, param_backup=False, param_shape_backup=False)</p>
+</blockquote>
 <p>对目标网络的一组卷积层的权重进行裁剪。</p>
 <p><strong>参数：</strong></p>
 <ul>
@@ -496,6 +501,24 @@
 <li><strong>sensitivities(dict)</strong>敏感度信息。</li>
 </ul>
 <p>示例：</p>
+<h2 id="get_ratios_by_losssensitivities-loss">get_ratios_by_loss(sensitivities, loss)</h2>
+<p>根据敏感度和精度损失阈值计算出一组剪切率。对于参数<code>w</code>, 其剪裁率为使精度损失低于<code>loss</code>的最大剪裁率。</p>
+<p>参数：</p>
+<ul>
+<li>
+<p><strong>sensitivities(dict):</strong> 敏感度信息。</p>
+</li>
+<li>
+<p><strong>loss:</strong> 精度损失阈值。</p>
+</li>
+</ul>
+<p>返回：</p>
+<ul>
+<li>ratios(dict): 一组剪切率。<code>key</code>是待剪裁参数的名称。<code>value</code>是对应参数的剪裁率。</li>
+</ul>
+<p>示例：</p>
+<div class="codehilite"><pre><span></span>
+</pre></div>
               
             </div>
           </div>
@@ -506,7 +529,7 @@
         <a href="../analysis_api/" class="btn btn-neutral float-right" title="敏感度分析">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../quantization_api_doc/" class="btn btn-neutral" title="量化"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../quantization_api/" class="btn btn-neutral" title="量化"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -532,7 +555,7 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../quantization_api_doc/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../quantization_api/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../analysis_api/" style="color: #fcfcfc">Next &raquo;</a></span>
