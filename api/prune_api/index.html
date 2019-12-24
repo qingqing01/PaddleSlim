@@ -93,9 +93,7 @@
     
         <ul>
         
-            <li><a class="toctree-l4" href="#pruner">Pruner</a></li>
-        
-            <li><a class="toctree-l4" href="#prunerprune">Pruner.prune</a></li>
+            <li><a class="toctree-l4" href="#class-pruner">class Pruner</a></li>
         
             <li><a class="toctree-l4" href="#sensitivity">sensitivity</a></li>
         
@@ -174,7 +172,7 @@
             <div class="section">
               
                 <h1 id="api">卷积通道剪裁API文档<a class="headerlink" href="#api" title="Permanent link">#</a></h1>
-<h2 id="pruner">Pruner<a class="headerlink" href="#pruner" title="Permanent link">#</a></h2>
+<h2 id="class-pruner">class Pruner<a class="headerlink" href="#class-pruner" title="Permanent link">#</a></h2>
 <hr />
 <blockquote>
 <p>paddleslim.prune.Pruner(criterion="l1_norm")<a href="">源代码</a></p>
@@ -192,10 +190,9 @@
 </pre></div>
 </td></tr></table>
 
-<h2 id="prunerprune">Pruner.prune<a class="headerlink" href="#prunerprune" title="Permanent link">#</a></h2>
 <hr />
 <blockquote>
-<p>paddleslim.prune.Pruner.prune(program, scope, params, ratios, place=None, lazy=False, only_graph=False, param_backup=False, param_shape_backup=False)</p>
+<p>prune(program, scope, params, ratios, place=None, lazy=False, only_graph=False, param_backup=False, param_shape_backup=False)</p>
 </blockquote>
 <p>对目标网络的一组卷积层的权重进行裁剪。</p>
 <p><strong>参数：</strong></p>
@@ -248,7 +245,7 @@
 </li>
 </ul>
 <p><strong>示例：</strong></p>
-<p>点击<a href="https://aistudio.baidu.com/aistudio/projectDetail/200786">AIStudio</a>执行以下示例代码。</p>
+<p>点击<a href="https://aistudio.baidu.com/aistudio/projectDetail/200786">AIStudio</a>执行以下示例代码。
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -391,10 +388,9 @@
     <span class="k">if</span> <span class="s2">&quot;weights&quot;</span> <span class="ow">in</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;param name: {}; param shape: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">param</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 </pre></div>
-</td></tr></table>
-
-<h2 id="sensitivity">sensitivity<a class="headerlink" href="#sensitivity" title="Permanent link">#</a></h2>
+</td></tr></table></p>
 <hr />
+<h2 id="sensitivity">sensitivity<a class="headerlink" href="#sensitivity" title="Permanent link">#</a></h2>
 <blockquote>
 <p>paddleslim.prune.sensitivity(program, place, param_names, eval_func, sensitivities_file=None, pruned_ratios=None) <a href="">源代码</a></p>
 </blockquote>
@@ -642,9 +638,8 @@
 </td></tr></table>
 
 <h2 id="merge_sensitive">merge_sensitive<a class="headerlink" href="#merge_sensitive" title="Permanent link">#</a></h2>
-<hr />
 <blockquote>
-<p>paddleslim.prune.merge_sensitive(sensitivities)</p>
+<p>merge_sensitive(sensitivities)</p>
 </blockquote>
 <p>合并多个敏感度信息。</p>
 <p>参数：</p>
@@ -678,9 +673,8 @@
 <p>其中，<code>weight_0</code>是卷积层参数的名称，sensitivities['weight_0']的<code>value</code>为剪裁比例，<code>value</code>为精度损失的比例。</p>
 <p>示例：</p>
 <h2 id="load_sensitivities">load_sensitivities<a class="headerlink" href="#load_sensitivities" title="Permanent link">#</a></h2>
-<hr />
 <blockquote>
-<p>paddleslim.prune.load_sensitivities(sensitivities_file)</p>
+<p>load_sensitivities(sensitivities_file)</p>
 </blockquote>
 <p>从文件中加载敏感度信息。</p>
 <p>参数：</p>
