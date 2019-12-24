@@ -121,6 +121,11 @@
     </ul>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../../algo/algo/">算法原理</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -150,6 +155,9 @@
     <li>量化训练</li>
     <li class="wy-breadcrumbs-aside">
       
+        <a href="https://github.com/PaddlePaddle/PaddleSlim/edit/master/docs/tutorials/quant_aware_demo.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
     </li>
   </ul>
   <hr/>
@@ -157,13 +165,24 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">在线量化示例</h1>
+                <h1 id="_1">在线量化示例<a class="headerlink" href="#_1" title="Permanent link">#</a></h1>
 <p>本示例介绍如何使用在线量化接口，来对训练好的分类模型进行量化, 可以减少模型的存储空间和显存占用。</p>
-<h2 id="_2">接口介绍</h2>
+<h2 id="_2">接口介绍<a class="headerlink" href="#_2" title="Permanent link">#</a></h2>
 <p>请参考 <a href='../../../paddleslim/quant/quantization_api_doc.md'>量化API文档</a>。</p>
-<h2 id="_3">分类模型的离线量化流程</h2>
-<h3 id="1">1. 配置量化参数</h3>
-<div class="codehilite"><pre><span></span>quant_config = {
+<h2 id="_3">分类模型的离线量化流程<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
+<h3 id="1">1. 配置量化参数<a class="headerlink" href="#1" title="Permanent link">#</a></h3>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>quant_config = {
     &#39;weight_quantize_type&#39;: &#39;abs_max&#39;,
     &#39;activation_quantize_type&#39;: &#39;moving_average_abs_max&#39;,
     &#39;weight_bits&#39;: 8,
@@ -176,17 +195,26 @@
     &#39;quant_weight_only&#39;: False
 }
 </pre></div>
+</td></tr></table>
 
-
-<h3 id="2-programop">2. 对训练和测试program插入可训练量化op</h3>
-<div class="codehilite"><pre><span></span>val_program = quant_aware(val_program, place, quant_config, scope=None, for_test=True)
+<h3 id="2-programop">2. 对训练和测试program插入可训练量化op<a class="headerlink" href="#2-programop" title="Permanent link">#</a></h3>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>val_program = quant_aware(val_program, place, quant_config, scope=None, for_test=True)
 
 compiled_train_prog = quant_aware(train_prog, place, quant_config, scope=None, for_test=False)
 </pre></div>
+</td></tr></table>
 
-
-<h3 id="3build">3.关掉指定build策略</h3>
-<div class="codehilite"><pre><span></span>build_strategy = fluid.BuildStrategy()
+<h3 id="3build">3.关掉指定build策略<a class="headerlink" href="#3build" title="Permanent link">#</a></h3>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>build_strategy = fluid.BuildStrategy()
 build_strategy.fuse_all_reduce_ops = False
 build_strategy.sync_batch_norm = False
 exec_strategy = fluid.ExecutionStrategy()
@@ -195,19 +223,37 @@ compiled_train_prog = compiled_train_prog.with_data_parallel(
         build_strategy=build_strategy,
         exec_strategy=exec_strategy)
 </pre></div>
+</td></tr></table>
 
-
-<h3 id="4-freeze-program">4. freeze program</h3>
-<div class="codehilite"><pre><span></span>float_program, int8_program = convert(val_program, 
+<h3 id="4-freeze-program">4. freeze program<a class="headerlink" href="#4-freeze-program" title="Permanent link">#</a></h3>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>float_program, int8_program = convert(val_program, 
                                       place,
                                       quant_config,
                                       scope=None,
                                       save_int8=True)
 </pre></div>
+</td></tr></table>
 
-
-<h3 id="5">5.保存预测模型</h3>
-<div class="codehilite"><pre><span></span>fluid.io.save_inference_model(
+<h3 id="5">5.保存预测模型<a class="headerlink" href="#5" title="Permanent link">#</a></h3>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>fluid.io.save_inference_model(
     dirname=float_path,
     feeded_var_names=[image.name],
     target_vars=[out], executor=exe,
@@ -223,6 +269,7 @@ fluid.io.save_inference_model(
     model_filename=int8_path + &#39;/model&#39;,
     params_filename=int8_path + &#39;/params&#39;)
 </pre></div>
+</td></tr></table>
               
             </div>
           </div>
@@ -257,6 +304,8 @@ fluid.io.save_inference_model(
 
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/PaddlePaddle/PaddleSlim/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../quant_post_demo/" style="color: #fcfcfc;">&laquo; Previous</a></span>
