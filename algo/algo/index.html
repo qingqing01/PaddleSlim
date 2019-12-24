@@ -206,11 +206,7 @@
 <h2 id="1-quantization-aware-training">1. Quantization Aware Training量化介绍<a class="headerlink" href="#1-quantization-aware-training" title="Permanent link">#</a></h2>
 <h3 id="11">1.1 背景<a class="headerlink" href="#11" title="Permanent link">#</a></h3>
 <p>近年来，定点量化使用更少的比特数（如8-bit、3-bit、2-bit等）表示神经网络的权重和激活已被验证是有效的。定点量化的优点包括低内存带宽、低功耗、低计算资源占用以及低模型存储需求等。</p>
-<p align="center">
-<img src="../images/algo/quan_table_0.png" height=258 width=600 hspace='10'/> <br />
-<strong>表1: 不同类型操作的开销对比</strong>
-</p>
-
+<p><center><img alt="表1: 不同类型操作的开销对比" src="../images/algo/algorithms-pruning.png" /></center></p>
 <p>由表1可知，低精度定点数操作的硬件面积大小及能耗比高精度浮点数要少几个数量级。 使用定点量化可带来4倍的模型压缩、4倍的内存带宽提升，以及更高效的cache利用(很多硬件设备，内存访问是主要能耗)。除此之外，计算速度也会更快(通常具有2x-3x的性能提升)。由表2可知，在很多场景下，定点量化操作对精度并不会造成损失。另外，定点量化对神经网络于嵌入式设备上的推断来说是极其重要的。</p>
 <p align="center">
 <img src="../images/algo/quan_table_1.png" height=155 width=500 hspace='10'/> <br />
