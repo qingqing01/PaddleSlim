@@ -221,10 +221,13 @@
 <h3 id="12">1.2 量化原理<a class="headerlink" href="#12" title="Permanent link">#</a></h3>
 <h4 id="121">1.2.1 量化方式<a class="headerlink" href="#121" title="Permanent link">#</a></h4>
 <p>目前，存在着许多方法可以将浮点数量化成定点数。例如：
-$$ r = min(max(x, a), b)$$ $$ s = \frac{b - a}{n - 1} $$ $$ q = \left \lfloor \frac{r - a}{s} \right \rceil $$
+<script type="math/tex; mode=display"> r = min(max(x, a), b)</script>
+<script type="math/tex; mode=display"> s = \frac{b - a}{n - 1} </script>
+<script type="math/tex; mode=display"> q = \left \lfloor \frac{r - a}{s} \right \rceil </script>
 式中，<span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>是待量化的浮点值，<span><span class="MathJax_Preview">[a, b]</span><script type="math/tex">[a, b]</script></span>是量化范围，<span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span>是待量化浮点数中的最小值， <span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span> 是待量化浮点数中的最大值。<span><span class="MathJax_Preview">\left \lfloor \right \rceil</span><script type="math/tex">\left \lfloor \right \rceil</script></span> 表示将结果四舍五入到最近的整数。如果量化级别为<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>，则<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>为<span><span class="MathJax_Preview">2^k</span><script type="math/tex">2^k</script></span>。例如，若<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>为8，则<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>为256。<span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>是量化得到的整数。
 PaddleSlim框架中选择的量化方法为最大绝对值量化(<code>max-abs</code>)，具体描述如下：
-$$ M = max(abs(x)) $$ $$ q = \left \lfloor \frac{x}{M} * (n - 1) \right \rceil $$
+<script type="math/tex; mode=display"> M = max(abs(x)) </script>
+<script type="math/tex; mode=display"> q = \left \lfloor \frac{x}{M} * (n - 1) \right \rceil </script>
 式中，<span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>是待被量化的浮点值，<span><span class="MathJax_Preview">M</span><script type="math/tex">M</script></span>是待量化浮点数中的绝对值最大值。<span><span class="MathJax_Preview">\left \lfloor \right \rceil</span><script type="math/tex">\left \lfloor \right \rceil</script></span>表示将结果四舍五入到最近的整数。对于8bit量化，PaddleSlim采用<code>int8_t</code>，即<span><span class="MathJax_Preview">n=2^7=128</span><script type="math/tex">n=2^7=128</script></span>。<span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>是量化得到的整数。
 无论是<code>min-max量化</code>还是<code>max-abs量化</code>，他们都可以表示为如下形式：
 <span><span class="MathJax_Preview">q = scale * r + b</span><script type="math/tex">q = scale * r + b</script></span>
@@ -243,17 +246,18 @@ $$ M = max(abs(x)) $$ $$ q = \left \lfloor \frac{x}{M} * (n - 1) \right \rceil $
 3) 反量化矩阵乘法或者卷积操作的输出结果为32-bit浮点型数据。
 4) 在32-bit浮点型数据上执行偏置加法操作。此处，偏置并未被量化。
 对于通用矩阵乘法(<code>GEMM</code>)，输入<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>和权重<span><span class="MathJax_Preview">W</span><script type="math/tex">W</script></span>的量化操作可被表述为如下过程：
-$$ X_q = \left \lfloor \frac{X}{X_m} * (n - 1) \right \rceil $$ $$ W_q = \left \lfloor \frac{W}{W_m} * (n - 1) \right \rceil $$
+<script type="math/tex; mode=display"> X_q = \left \lfloor \frac{X}{X_m} * (n - 1) \right \rceil </script>
+<script type="math/tex; mode=display"> W_q = \left \lfloor \frac{W}{W_m} * (n - 1) \right \rceil </script>
 执行通用矩阵乘法：
-$$ Y_q = X_q * W_q $$
+<script type="math/tex; mode=display"> Y_q = X_q * W_q </script>
 对量化乘积结果<span><span class="MathJax_Preview">Yq</span><script type="math/tex">Yq</script></span>进行反量化:
-$$
+<script type="math/tex; mode=display">
 \begin{align}
 Y_{dq} = \frac{Y_q}{(n - 1) * (n - 1)} * X_m * W_m \
 =\frac{X_q * W_q}{(n - 1) * (n - 1)} * X_m * W_m \
 =(\frac{X_q}{n - 1} * X_m) * (\frac{W_q}{n - 1} * W_m) \
 \end{align}
-$$
+</script>
 上述公式表明反量化操作可以被移动到<code>GEMM</code>之前，即先对<span><span class="MathJax_Preview">Xq</span><script type="math/tex">Xq</script></span>和<span><span class="MathJax_Preview">Wq</span><script type="math/tex">Wq</script></span>执行反量化操作再做<code>GEMM</code>操作。因此，前向传播的工作流亦可表示为如下方式：</p>
 <p align="center">
 <img src="https://github.com/PaddlePaddle/PaddleSlim/tree/develop/docs/docs/images/algo/quan_fwd_1.png" height=435 width=341 hspace='10'/> <br />
@@ -501,7 +505,7 @@ e^{\frac{(r_k-r)}{T_k}} & r_k < r\\
     <script>var base_url = '../..';</script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../mathjax-config.js" defer></script>
-      <script src="../../MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
       <script src="../../search/main.js" defer></script>
 
 </body>
