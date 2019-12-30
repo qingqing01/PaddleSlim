@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Algo - PaddleSlim Docs</title>
+  <title>算法原理 - PaddleSlim Docs</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Algo";
+    var mkdocs_page_name = "\u7b97\u6cd5\u539f\u7406";
     var mkdocs_page_input_path = "algo/algo.md";
     var mkdocs_page_url = null;
   </script>
@@ -111,9 +111,58 @@
     </ul>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../../algo.md">算法原理</a>
+    <a class="current" href="./">算法原理</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#_1">目录</a></li>
+    
+
+    <li class="toctree-l2"><a href="#1-quantization-aware-training">1. Quantization Aware Training量化介绍</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#11">1.1 背景</a></li>
+        
+            <li><a class="toctree-l3" href="#12">1.2 量化原理</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#2">2. 卷积核剪裁原理</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#21">2.1  剪裁卷积核</a></li>
+        
+            <li><a class="toctree-l3" href="#22-uniform">2.2 Uniform剪裁卷积网络</a></li>
+        
+            <li><a class="toctree-l3" href="#23">2.3 基于敏感度剪裁卷积网络</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#3">3. 蒸馏</a></li>
+    
+
+    <li class="toctree-l2"><a href="#4">4. 轻量级模型结构搜索</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#41">4.1 搜索策略</a></li>
+        
+            <li><a class="toctree-l3" href="#42">4.2 搜索空间</a></li>
+        
+            <li><a class="toctree-l3" href="#43">4.3 模型延时评估</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#5">5. 参考文献</a></li>
+    
+
+    </ul>
 	    </li>
           
         </ul>
@@ -138,7 +187,7 @@
     
       
     
-    <li>Algo</li>
+    <li>算法原理</li>
     <li class="wy-breadcrumbs-aside">
       
         <a href="https://github.com/PaddlePaddle/PaddleSlim/edit/master/docs/algo/algo.md"
@@ -421,6 +470,13 @@ e^{\frac{(r_k-r)}{T_k}} & r_k < r\\
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../../table_latency/" class="btn btn-neutral" title="硬件延时评估表"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
@@ -444,6 +500,8 @@ e^{\frac{(r_k-r)}{T_k}} & r_k < r\\
       
           <a href="https://github.com/PaddlePaddle/PaddleSlim/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
+      
+        <span><a href="../../table_latency/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
     </span>
